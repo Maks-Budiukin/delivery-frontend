@@ -1,4 +1,6 @@
+import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
+import { AddToCartThunk, RemoveFromCartThunk } from "../../redux/products/products.thunk"
 
 const Wrapper = styled.div`
  width: 240px;
@@ -59,11 +61,55 @@ const AddToCartButton = styled.button`
     &:focus  {
       outline: none;
       border: 1px solid skyblue;
-      color: skyblue;
+      background-color: skyblue;
+      color: #fff;
     }
 `
 
-export const ProdItem = ({img, name, id, description, price}) => {
+const RemoveCartButton = styled.button`
+    margin-left: auto;
+    margin-right: 8px;
+    width: 86px;
+    background-color: skyblue;
+    color: #fff;
+    padding: 7px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid skyblue;
+    border-radius: 4px;
+
+    cursor: pointer;
+
+        transition-property: color, background-color, border;
+    transition-duration: 250ms;
+    transition-timing-function: ease;
+
+    &:hover,
+    &:focus  {
+      outline: none;
+      border: 1px solid tomato;
+      background-color: tomato;
+    }
+`
+
+export const ProdItem = ({ img, name, id, description, price, shop }) => {
+    const cart = useSelector(state => state.products.cart)
+    const added = cart.find(item => item.id === id)
+    // const [added, setAdded] = useState(false)
+
+    const dispatch = useDispatch();
+
+    const handleAddClick = () => {
+        // setAdded(true)
+        dispatch(AddToCartThunk({img, name, id, description, price, shopID: shop}))
+    }
+
+    const handleRemoveClick = () => {
+        // setAdded(false)
+        dispatch(RemoveFromCartThunk(id))
+    }
+
     return((<Wrapper>
         <ImageThumb>
             <ProdImage src={img} alt="shop logo"></ProdImage>
@@ -71,7 +117,11 @@ export const ProdItem = ({img, name, id, description, price}) => {
         <ProductName>{name}</ProductName>
         <ProductInfo>
             <ProductPrice>${price}</ProductPrice>
-            <AddToCartButton>Add to cart</AddToCartButton>
+
+            {added
+            ? <RemoveCartButton onClick={handleRemoveClick}>Remove</RemoveCartButton>
+            : <AddToCartButton onClick={handleAddClick}>Add to cart</AddToCartButton>}
+            
         </ProductInfo>
         
     </Wrapper>))

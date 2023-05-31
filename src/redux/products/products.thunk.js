@@ -16,3 +16,28 @@ export const getProductsThunk = createAsyncThunk(
     }
   }
 );
+
+export const AddToCartThunk = createAsyncThunk(
+  "products/addToCart",
+  async (product, thunkAPI) => {
+    try {
+      return product;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const RemoveFromCartThunk = createAsyncThunk(
+  "products/RemoveFromCart",
+  async (id, thunkAPI) => {
+    try {
+      const { products } = thunkAPI.getState();
+      const filteredCart = products.cart.filter((product) => product.id !== id);
+
+      return filteredCart;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

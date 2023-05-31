@@ -1,8 +1,9 @@
-import { useDispatch } from "react-redux"
+import { useDispatch} from "react-redux"
 import { setActiveShopThunk } from "../../redux/shops/shops.thunk"
 import styled from "styled-components"
 
-const Wrapper = styled.button`
+
+const ShopButton = styled.button`
     display: flex;
     align-items: center;
     width: 250px;
@@ -57,14 +58,15 @@ const ShopName = styled.div`
     
 `
 
-export const ShopItem = ({ id, name, logo }) => {
-
+export const ShopItem = ({ id, name, logo, active }) => {
     const dispatch = useDispatch();
 
-    return (<Wrapper onClick={() => dispatch(setActiveShopThunk(id))}>
+    return (<>{
+       <ShopButton disabled={active ? false : true} onClick={() => dispatch(setActiveShopThunk(id))}>
         <ImageThumb>
             <Logo src={logo} alt="shop logo"></Logo>
         </ImageThumb>
         <ShopName>{name}</ShopName>
-    </Wrapper>)
+    </ShopButton >
+}</>)
 }

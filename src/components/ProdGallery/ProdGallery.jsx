@@ -25,7 +25,7 @@ export const ProdGallery = () => {
     }, [dispatch, activeShopID])
     return (<StyledGallery>
         {activeShopID && products.map(item => {
-        return(<ProdItem id={item._id} name={item.name} img={item.img} price={item.price} description={item.description}></ProdItem>)
+        return(<ProdItem id={item._id} name={item.name} img={item.img} price={item.price} description={item.description} shop={activeShopID}></ProdItem>)
     })}
     
     </StyledGallery>)
