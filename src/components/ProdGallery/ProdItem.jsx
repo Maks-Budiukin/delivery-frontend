@@ -1,12 +1,19 @@
 import styled from "styled-components"
 
 const Wrapper = styled.div`
-
+ width: 240px;
+ height: 240px;
+ border-radius: 6px;
+ /* border: 1px solid skyblue; */
+ overflow: hidden;
+ /* margin-bottom: 30px; */
+box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
 
 `
 
 const ImageThumb = styled.div`
-    width: 200px;
+    width: 240px;
+    height: 160px;
     overflow: hidden;
 `
 
@@ -14,17 +21,46 @@ const ProdImage = styled.img`
     width: 100%;
 `
 
-const ShopName = styled.div`
+const ProductName = styled.p`
+    /* text-align: center; */
+    font-weight: bold;
+    margin: 4px 0 0 8px;
+`
+
+const ProductInfo = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+`
+
+const ProductPrice = styled.p`
+    font-weight: bold;
+    margin: 8px;
+    font-size: 24px;
+`
+const AddToCartButton = styled.button`
+    margin-left: auto;
+    margin-right: 8px;
+    background-color: #fff;
+    padding: 7px 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 130px;
-    height: 90px;
-    font-size: 16px;
+    border: 1px solid silver;
     border-radius: 4px;
-    border-right: 1px solid skyblue;
-    border-bottom: 1px solid skyblue;
-    
+
+    cursor: pointer;
+
+        transition-property: color, background-color, border;
+    transition-duration: 250ms;
+    transition-timing-function: ease;
+
+    &:hover,
+    &:focus  {
+      outline: none;
+      border: 1px solid skyblue;
+      color: skyblue;
+    }
 `
 
 export const ProdItem = ({img, name, id, description, price}) => {
@@ -32,6 +68,11 @@ export const ProdItem = ({img, name, id, description, price}) => {
         <ImageThumb>
             <ProdImage src={img} alt="shop logo"></ProdImage>
         </ImageThumb>
-        <ShopName>{name}</ShopName>
+        <ProductName>{name}</ProductName>
+        <ProductInfo>
+            <ProductPrice>${price}</ProductPrice>
+            <AddToCartButton>Add to cart</AddToCartButton>
+        </ProductInfo>
+        
     </Wrapper>))
 }

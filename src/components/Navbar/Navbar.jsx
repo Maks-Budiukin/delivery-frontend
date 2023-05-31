@@ -3,9 +3,9 @@ import styled from "styled-components"
 
 
 const StyledSection = styled.section`
-    padding: 16px 0;
-    border-bottom: 1px solid silver;
-
+    /* padding: 16px 0; */
+    border-bottom: 1px solid #c0c0c03e;
+    color: #c0c0c03e;
 `
 const StyledLink = styled(NavLink)`
     display: block;

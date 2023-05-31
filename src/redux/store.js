@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
@@ -11,12 +11,18 @@ import { productsInitState } from "./products/products.init-state";
 import { productsReducer } from "./products/products.slice";
 
 const persistConfig = {
-  key: "auth",
+  key: "root",
   storage,
-  whitelist: ["token"],
+  whitelist: ["token", "products"],
 };
 
-const persistedReducer = persistReducer(persistConfig, authReducer);
+const rootReducer = combineReducers({
+  auth: authReducer,
+  shops: shopsReducer,
+  products: productsReducer,
+});
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const initState = {
   auth: authInitState,
@@ -25,14 +31,21 @@ const initState = {
 };
 
 export const store = configureStore({
-  reducer: {
-    auth: persistedReducer,
-    shops: shopsReducer,
-    products: productsReducer,
-  },
+  reducer: persistedReducer,
   middleware: [thunk],
   devTools: true,
   preloadedState: initState,
 });
 
 export const persistor = persistStore(store);
+
+// export const store = configureStore({
+//   reducer: {
+//     auth: persistedReducer,
+//     shops: shopsReducer,
+//     products: productsReducer,
+//   },
+//   middleware: [thunk],
+//   devTools: true,
+//   preloadedState: initState,
+// });
