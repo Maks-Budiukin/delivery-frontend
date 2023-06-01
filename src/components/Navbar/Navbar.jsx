@@ -1,4 +1,6 @@
+import { useDispatch, useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
+import { logoutThunk } from "redux/auth/auth.thunk"
 import styled from "styled-components"
 
 
@@ -12,14 +14,50 @@ const StyledLink = styled(NavLink)`
     width: 120px;
     background-color: #fff;
     padding: 5px 10px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-right: 24px; 
     /* border: 1px solid silver; */
     border-radius: 4px;
     text-decoration: none;
     text-align: center;
     font-size: 14px;
     font-weight: 500;
+
+    transition-property: color, background-color, border;
+    transition-duration: 250ms;
+    transition-timing-function: ease;
+
+
+    &:visited {
+        color: black;
+    }
+    &:hover,
+    &:focus  {
+      outline: none;
+      /* border: 1px solid skyblue; */
+      background-color: #87cfeb3b;
+    }
+  &.active {
+    color: #fff;
+    background-color: skyblue;
+    /* border: 1px solid skyblue; */
+  }
+`
+
+const StyledButton = styled.button`
+
+    width: 120px;
+    background-color: #fff;
+    padding: 5px 10px;
+
+    margin-right: 24px; 
+    /* border: 1px solid silver; */
+    outline: none;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
 
     transition-property: color, background-color, border;
     transition-duration: 250ms;
@@ -56,8 +94,6 @@ const NavBar = styled.nav`
 `
 const LogoLink = styled(NavLink)`
     width: 150px;
-    /* display: block; */
-    /* margin-right: 200px; */
 `
 
 const Logo = styled.img`
@@ -68,6 +104,10 @@ const Logo = styled.img`
 
 
 export const Navbar = () => {
+
+    const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
+    const dispatch = useDispatch();
+
     return (<StyledSection>
         <NavBar>
 
@@ -78,11 +118,12 @@ export const Navbar = () => {
             <NavList>
                 <li><StyledLink to="/">Shop</StyledLink></li>
                 <li><StyledLink to="/cart">Cart</StyledLink></li>
-                <li><StyledLink to="/orders">Orders</StyledLink></li>
+                {isLoggedIn && <li><StyledLink to="/orders">Orders</StyledLink></li>}
             </NavList>
-
-            <StyledLink to="/auth">Auth</StyledLink>
-
+                {isLoggedIn? 
+            <StyledButton type="button" onClick={() => dispatch(logoutThunk())}>Logout</StyledButton>
+            : <StyledLink to="/register">Auth</StyledLink>
+                }
         </NavBar>
     </StyledSection>)
 }

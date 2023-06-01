@@ -38,8 +38,8 @@ export const loginThunk = createAsyncThunk(
         data: credentials,
       });
 
-      token.set(response.data.token);
-      return response.data;
+      token.set(response.data.user.token);
+      return response.data.user;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -69,8 +69,25 @@ export const refreshThunk = createAsyncThunk(
     token.set(state.auth.token);
 
     try {
-      const response = await axios.get("/user/current");
-      return response.data;
+      const response = await axios.get("/auth/current");
+      return response.data.user;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getOrdersThunk = createAsyncThunk(
+  "auth/getOrders",
+  async (id, thunkAPI) => {
+    try {
+      const response = await axios({
+        method: "get",
+        url: `/orders/${id}`,
+      });
+
+      console.log(response.data);
+      return response.data.orders;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

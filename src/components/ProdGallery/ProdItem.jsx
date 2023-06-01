@@ -102,7 +102,7 @@ export const ProdItem = ({ img, name, id, description, price, shop }) => {
 
     const handleAddClick = () => {
         // setAdded(true)
-        dispatch(AddToCartThunk({img, name, id, description, price, shopID: shop}))
+        dispatch(AddToCartThunk({img, name, id, description, price, shopID: shop, count: 1}))
     }
 
     const handleRemoveClick = () => {

@@ -1,6 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { authInitState } from "./auth.init-state";
-import { loginThunk, logoutThunk, refreshThunk, regThunk } from "./auth.thunk";
+import {
+  getOrdersThunk,
+  loginThunk,
+  logoutThunk,
+  refreshThunk,
+  regThunk,
+} from "./auth.thunk";
 
 const authSlice = createSlice({
   name: "auth",
@@ -14,6 +20,7 @@ const authSlice = createSlice({
 
       .addCase(loginThunk.pending, (state) => state)
       .addCase(loginThunk.fulfilled, (state, { payload }) => {
+        state.user.id = payload._id;
         state.user.name = payload.name;
         state.user.email = payload.email;
         state.user.phone = payload.phone;
@@ -26,6 +33,7 @@ const authSlice = createSlice({
       .addCase(logoutThunk.pending, (state) => state)
       .addCase(logoutThunk.fulfilled, (state) => {
         state.token = null;
+        state.user.id = "";
         state.user.name = "";
         state.user.email = "";
         state.user.phone = "";
@@ -38,16 +46,23 @@ const authSlice = createSlice({
         state.isRefreshing = true;
       })
       .addCase(refreshThunk.fulfilled, (state, { payload }) => {
+        state.user.id = payload._id;
         state.user.name = payload.name;
         state.user.email = payload.email;
-        state.user.name = payload.phone;
-        state.user.name = payload.address;
+        state.user.phone = payload.phone;
+        state.user.address = payload.address;
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
       .addCase(refreshThunk.rejected, (state, { payload }) => {
         state.isRefreshing = false;
-      });
+      })
+
+      .addCase(getOrdersThunk.pending, (state) => state)
+      .addCase(getOrdersThunk.fulfilled, (state, { payload }) => {
+        state.user.orders = [...payload];
+      })
+      .addCase(getOrdersThunk.rejected, (state, { payload }) => state);
   },
 });
 

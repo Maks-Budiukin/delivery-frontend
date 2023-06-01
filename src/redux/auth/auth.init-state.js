@@ -1,5 +1,5 @@
 export const authInitState = {
-  user: { name: "", email: "", phone: "", address: "" },
+  user: { id: "", name: "", email: "", phone: "", address: "", orders: [] },
   token: null,
   isLoggedIn: false,
   isRefreshing: false,

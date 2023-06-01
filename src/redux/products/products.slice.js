@@ -4,6 +4,8 @@ import {
   getProductsThunk,
   AddToCartThunk,
   RemoveFromCartThunk,
+  changeItemCountThunk,
+  ClearCartThunk,
 } from "./products.thunk";
 
 const productsSlice = createSlice({
@@ -32,7 +34,23 @@ const productsSlice = createSlice({
           state.enabledShop = null;
         }
       })
-      .addCase(RemoveFromCartThunk.rejected, (state, { payload }) => state);
+      .addCase(RemoveFromCartThunk.rejected, (state, { payload }) => state)
+
+      .addCase(ClearCartThunk.pending, (state) => state)
+      .addCase(ClearCartThunk.fulfilled, (state, { payload }) => {
+        state.cart = payload;
+        state.enabledShop = null;
+      })
+      .addCase(ClearCartThunk.rejected, (state, { payload }) => state)
+
+      .addCase(changeItemCountThunk.pending, (state) => state)
+      .addCase(changeItemCountThunk.fulfilled, (state, { payload }) => {
+        state.cart = payload;
+      })
+      .addCase(changeItemCountThunk.rejected, (state, { payload }) => {
+        console.log(state.cart);
+        console.log(payload);
+      });
   },
 });
 
