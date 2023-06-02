@@ -1,15 +1,11 @@
-import { ShopList } from "../../components/ShopList/ShopList"
-import { ProdGallery } from "../../components/ProdGallery/ProdGallery"
-import styled from "styled-components"
-
-const Wrapper = styled.section`
-    display: flex;
-    padding: 16px 0;
-`
+import { ShopList } from "../../components/ShopList/ShopList";
+import { ProdGallery } from "../../components/ProdGallery/ProdGallery";
+import { Wrapper } from "./Shop.styled";
 
 export const Shop = () => {
-    return (<Wrapper>
-    <ShopList />
-    <ProdGallery />
-    </Wrapper>)
+    return (
+        <Wrapper>
+            <ShopList />
+            <ProdGallery />
+        </Wrapper>)
 }

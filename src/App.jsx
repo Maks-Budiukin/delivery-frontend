@@ -1,13 +1,9 @@
 import './App.css';
 import { useEffect } from "react";
-
 import { useDispatch, useSelector } from "react-redux";
 import { refreshThunk } from "redux/auth/auth.thunk";
-
-import { RestrictedRoute } from "./Routes/RestrictedRoute";
-import { PrivateRoute } from "./Routes/PrivateRoute";
-
 import { Route, Routes } from "react-router-dom";
+
 import { Shop } from "./Pages/Shop/Shop";
 import { Cart } from "./Pages/Cart/Cart";
 import { Orders } from "./Pages/Orders/Orders";
@@ -15,6 +11,9 @@ import { Auth } from "./Pages/Auth/Auth";
 import { Layout } from "./components/Layout/Layout";
 import { Login } from 'components/Login/Login';
 import { Register } from 'components/Register/Register';
+
+import { RestrictedRoute } from "./Routes/RestrictedRoute";
+import { PrivateRoute } from "./Routes/PrivateRoute";
 
 import { Toaster } from 'react-hot-toast';
 
@@ -30,10 +29,7 @@ function App() {
   }, [dispatch, token])
   
   return (<>
-    <div><Toaster
-      position="top-center"
-      reverseOrder={false} />
-    </div>
+    <div><Toaster position="top-center" reverseOrder={false} /></div>
     <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Shop />} />

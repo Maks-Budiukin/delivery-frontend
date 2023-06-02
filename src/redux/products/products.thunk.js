@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-hot-toast";
 
 export const getProductsThunk = createAsyncThunk(
   "products/getByShop",
@@ -11,6 +12,7 @@ export const getProductsThunk = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
+      toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -22,6 +24,7 @@ export const AddToCartThunk = createAsyncThunk(
     try {
       return product;
     } catch (error) {
+      toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -36,6 +39,7 @@ export const RemoveFromCartThunk = createAsyncThunk(
 
       return filteredCart;
     } catch (error) {
+      toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -48,6 +52,7 @@ export const ClearCartThunk = createAsyncThunk(
       const clearedCart = [];
       return clearedCart;
     } catch (error) {
+      toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -71,7 +76,7 @@ export const changeItemCountThunk = createAsyncThunk(
 
       return filteredCart;
     } catch (error) {
-      console.log(error.message);
+      toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -89,6 +94,7 @@ export const createOrderThunk = createAsyncThunk(
 
       return response.data;
     } catch (error) {
+      toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }

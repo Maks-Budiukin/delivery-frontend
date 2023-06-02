@@ -47,10 +47,7 @@ const productsSlice = createSlice({
       .addCase(changeItemCountThunk.fulfilled, (state, { payload }) => {
         state.cart = payload;
       })
-      .addCase(changeItemCountThunk.rejected, (state, { payload }) => {
-        console.log(state.cart);
-        console.log(payload);
-      });
+      .addCase(changeItemCountThunk.rejected, (state, { payload }) => {});
   },
 });
 

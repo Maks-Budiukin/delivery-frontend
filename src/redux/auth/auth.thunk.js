@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-hot-toast";
 
 axios.defaults.baseURL = "https://delivery-muvr.onrender.com/api";
 
@@ -23,6 +24,7 @@ export const regThunk = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
+      toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -41,6 +43,7 @@ export const loginThunk = createAsyncThunk(
       token.set(response.data.user.token);
       return response.data.user;
     } catch (error) {
+      toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -57,6 +60,7 @@ export const logoutThunk = createAsyncThunk(
       token.unset();
       return response.data;
     } catch (error) {
+      toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -72,6 +76,7 @@ export const refreshThunk = createAsyncThunk(
       const response = await axios.get("/auth/current");
       return response.data.user;
     } catch (error) {
+      toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -86,9 +91,9 @@ export const getOrdersThunk = createAsyncThunk(
         url: `/orders/${id}`,
       });
 
-      console.log(response.data);
       return response.data.orders;
     } catch (error) {
+      toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }

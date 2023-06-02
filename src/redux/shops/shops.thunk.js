@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-hot-toast";
 
 export const getShopsThunk = createAsyncThunk(
   "shops/getAll",
@@ -9,9 +10,9 @@ export const getShopsThunk = createAsyncThunk(
         method: "get",
         url: "/shops",
       });
-      console.log(response.data.shops);
       return response.data;
     } catch (error) {
+      toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -23,6 +24,7 @@ export const setActiveShopThunk = createAsyncThunk(
     try {
       return shopID;
     } catch (error) {
+      toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }

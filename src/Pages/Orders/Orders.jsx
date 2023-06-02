@@ -12,11 +12,6 @@ export const Orders = () => {
     useEffect(() => {
         dispatch(getOrdersThunk(userID))
     }, [dispatch])
-
  
-    return (           
-<OrdersList />
-        
-    
-   )
+    return (<OrdersList />)
 }
