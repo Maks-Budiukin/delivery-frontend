@@ -16,6 +16,8 @@ import { Layout } from "./components/Layout/Layout";
 import { Login } from 'components/Login/Login';
 import { Register } from 'components/Register/Register';
 
+import { Toaster } from 'react-hot-toast';
+
 function App() {
 
     const dispatch = useDispatch();
@@ -27,7 +29,11 @@ function App() {
     }
   }, [dispatch, token])
   
-  return (
+  return (<>
+    <div><Toaster
+      position="top-center"
+      reverseOrder={false} />
+    </div>
     <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Shop />} />
@@ -38,7 +44,7 @@ function App() {
           <Route path="/register" element={<RestrictedRoute component={Register} redirectTo={'/'} />} />
       </Route>
     </Routes>
-  );
+  </>);
 }
 
 export default App;

@@ -1,8 +1,10 @@
 import { nanoid } from "nanoid";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
-import { createOrderThunk } from "redux/products/products.thunk";
+import { ClearCartThunk, createOrderThunk } from "redux/products/products.thunk";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const StyledForm = styled.form`
 margin-top: 16px;
@@ -26,7 +28,11 @@ width: 300px;
         border: 1px solid skyblue;
         }
     }
-    button {
+    
+`
+
+const StyledButton = styled.button`
+    display: block;
     margin-left: auto;
     background-color: #fff;
     padding: 5px 10px;
@@ -45,14 +51,52 @@ width: 300px;
       color: #fff;
       border: 1px solid skyblue;
     }
-  }
-`
+  `
 
 const TotalPrice = styled.p`
     font-weight: bold;
     margin: 8px;
-    font-size: 24px;
+    font-size: 36px;
 `
+
+const ToastContainer = styled.div`
+  width: 100%;
+  height: 200px;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
+const ToastContent = styled.div`
+  
+`
+
+const ToastButton = styled.button`
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 16px;
+    background-color: #fff;
+    padding: 5px 10px;
+    border: 1px solid skyblue;
+    border-radius: 4px;
+    color: skyblue;
+    font-weight: bold;
+
+    transition-property: color, background-color, border;
+    transition-duration: 250ms;
+    transition-timing-function: ease;
+
+    &:hover,
+    &:focus  {
+      background-color: skyblue;
+      color: #fff;
+      border: 1px solid skyblue;
+    }
+  `
 
 export const CartUserForm = () => {
   const cart = useSelector(state => state.products.cart)
@@ -67,7 +111,9 @@ export const CartUserForm = () => {
     const nameInpudId = nanoid();
     const emailInpudId = nanoid();
     const phoneInpudId = nanoid();
-    const addressInpudId = nanoid();
+  const addressInpudId = nanoid();
+  
+  const navigate = useNavigate();
 
       const onInputChange = (event) => {
     switch (event.target.name) {
@@ -106,6 +152,25 @@ export const CartUserForm = () => {
         setNumber("");
         setEmail("");
         setAddress("");
+    
+    dispatch(ClearCartThunk());
+    // toast.success("Your order is posted!")
+
+    toast((t) => (
+      <ToastContainer>
+        <ToastContent>
+        <b>Your order has been created!</b>
+        <br />
+        Our manager will call in a moment!
+        <ToastButton onClick={() => toast.dismiss(t.id)}>
+          OK
+          </ToastButton>
+          </ToastContent>
+      </ToastContainer>
+    ));
+
+
+    navigate("/orders")
   }
 
     return(<><StyledForm onSubmit={handleSubmit}>
@@ -154,7 +219,7 @@ export const CartUserForm = () => {
       required
       />
       <TotalPrice>${total}</TotalPrice>
-        <button type="submit">Submit Order</button>
+        <StyledButton type="submit">Submit Order</StyledButton>
         
     </StyledForm></>)
 }
