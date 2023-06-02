@@ -21,6 +21,7 @@ function App() {
 
     const dispatch = useDispatch();
     const token = useSelector(state => state.auth.token);
+    const isRefreshing = useSelector(state => state.auth.isRefreshing)
 
   useEffect(() => {
     if (token) {

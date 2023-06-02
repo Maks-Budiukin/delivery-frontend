@@ -54,10 +54,10 @@ export const Register = () => {
             type="text"
             name="name"
             id={nameInpudId}
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            title="Name may contain any symbols and be maximum 16 characters long."
             value={name}
             onChange={onInputChange}
+            maxLength={16}
             required
               />
             
@@ -66,7 +66,6 @@ export const Register = () => {
             type="email"
             name="email"
             id={emailInpudId}
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
             title="Email must have the following shape: email@email.com"
             value={email}
             onChange={onInputChange}
@@ -78,9 +77,10 @@ export const Register = () => {
             type="password"
             name="password"
             id={passwordInpudId}
-            title="Password must be strong as teenager's erection!"
+            title="Password must be at least 6 characters long!"
             value={password}
             onChange={onInputChange}
+            minLength={6}
             required
                   />
             
@@ -89,8 +89,10 @@ export const Register = () => {
             type="tel"
             name="phone"
             id={phoneInpudId}
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            pattern="[+]38([0-9]{10})"
+            title="Phone number must be digits in format +38XXXXXXXXXX (NO DASHES!)"
+            minLength={13}
+            maxLength={13}
             value={phone}
             onChange={onInputChange}
             required
@@ -101,11 +103,10 @@ export const Register = () => {
             type="text"
             name="address"
             id={addressInpudId}
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            title="Your address for deliveries."
             value={address}
             onChange={onInputChange}
-            required
+            
               />
         
           <LinkBlock>

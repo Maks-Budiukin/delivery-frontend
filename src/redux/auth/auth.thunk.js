@@ -93,7 +93,6 @@ export const getOrdersThunk = createAsyncThunk(
 
       return response.data.orders;
     } catch (error) {
-      toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }

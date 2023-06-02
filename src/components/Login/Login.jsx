@@ -39,8 +39,6 @@ export const Login = () => {
             type="email"
             name="email"
             id={emailInpudId}
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-            
             value={email}
             onChange={onInputChange}
             required
@@ -48,9 +46,9 @@ export const Login = () => {
           <label htmlFor={passwordInpudId}>Password </label>    
           <input
             type="password"
-                name="password"
-                id={passwordInpudId}
-                value={password}
+            name="password"
+            id={passwordInpudId}
+            value={password}
             onChange={onInputChange}
             required
           />

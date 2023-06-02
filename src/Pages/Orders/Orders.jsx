@@ -6,12 +6,13 @@ import { OrdersList } from "components/OrdersList/OrdersList";
 
 export const Orders = () => {
     const userID = useSelector(state => state.auth.user.id)
+    const isRefreshing = useSelector(state => state.auth.isRefreshing)
     
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getOrdersThunk(userID))
-    }, [dispatch])
+        !isRefreshing && dispatch(getOrdersThunk(userID))
+    }, [dispatch, isRefreshing])
  
     return (<OrdersList />)
 }
