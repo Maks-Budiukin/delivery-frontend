@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const StyledOrderItem = styled.li`
   position: relative;
   margin-top: 32px;
-  /* padding: 16px 0; */
   width: 100%;
   border: 1px solid skyblue;
   border-top: none;
