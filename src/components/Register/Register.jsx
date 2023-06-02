@@ -6,6 +6,13 @@ import { loginThunk, regThunk } from "redux/auth/auth.thunk";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 
+const Wrapper = styled.section`
+display: flex;
+justify-content: center;
+  padding: 24px 0;
+  text-align: center;
+`
+
 const StyledForm = styled.form`
 display: flex;
 flex-wrap: wrap;
@@ -40,6 +47,49 @@ width: 300px;
       border: 1px solid skyblue;
     }
   }
+`
+
+const StyledLink = styled(NavLink)`
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 120px;
+    background-color: #fff;
+    padding: 5px 10px;
+ 
+    /* border: 1px solid silver; */
+    border-radius: 4px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #87cfeb3b;
+
+    transition-property: color, background-color, border;
+    transition-duration: 250ms;
+    transition-timing-function: ease;
+
+
+    &:visited {
+        color: black;
+    }
+    &:hover,
+    &:focus  {
+      outline: none;
+      /* border: 1px solid skyblue; */
+      background-color: skyblue;
+      color: #fff;
+    }
+  &.active {
+    color: #fff;
+    background-color: skyblue;
+    /* border: 1px solid skyblue; */
+  }
+`
+
+const Header = styled.h1`
+  color: skyblue;
+  font-size: 48px;
 `
 
 export const Register = () => {
@@ -86,7 +136,9 @@ export const Register = () => {
     //     setAddress("");
   }
 
-    return(<>
+    return(<Wrapper>
+      <div>
+        <Header>Sign UP!</Header>
         <StyledForm onSubmit={handleSubmit}>
 
     <label htmlFor={nameInpudId}>Name </label>
@@ -152,8 +204,9 @@ export const Register = () => {
         
         </StyledForm>
         <p>Already registered? </p>
-        <NavLink to="/login">Log In!</NavLink>
-        </>
+        <StyledLink to="/login">Then Log IN!</StyledLink>
+        </div>
+        </Wrapper>
     )
 }
 

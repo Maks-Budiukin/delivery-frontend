@@ -5,10 +5,11 @@ import { createOrderThunk } from "redux/products/products.thunk";
 import styled from "styled-components";
 
 const StyledForm = styled.form`
+margin-top: 16px;
 display: flex;
 flex-wrap: wrap;
 justify-content: space-between;
-
+height: 170px;
 gap: 4px;
 width: 300px;
 
@@ -29,12 +30,19 @@ width: 300px;
     margin-left: auto;
     background-color: #fff;
     padding: 5px 10px;
-    border: 1px solid silver;
+    border: 1px solid skyblue;
     border-radius: 4px;
+    color: skyblue;
+    font-weight: bold;
+
+    transition-property: color, background-color, border;
+    transition-duration: 250ms;
+    transition-timing-function: ease;
 
     &:hover,
     &:focus  {
-      outline: none;
+      background-color: skyblue;
+      color: #fff;
       border: 1px solid skyblue;
     }
   }

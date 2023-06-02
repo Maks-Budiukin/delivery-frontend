@@ -5,6 +5,12 @@ import { useDispatch } from "react-redux";
 import { loginThunk } from "redux/auth/auth.thunk";
 import { NavLink } from "react-router-dom";
 
+const Wrapper = styled.section`
+display: flex;
+justify-content: center;
+  padding: 24px 0;
+  text-align: center;
+`
 
 const StyledForm = styled.form`
 display: flex;
@@ -42,6 +48,49 @@ width: 300px;
   }
 `
 
+const Header = styled.h1`
+  color: skyblue;
+  font-size: 48px;
+`
+
+const StyledLink = styled(NavLink)`
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 120px;
+    background-color: #fff;
+    padding: 5px 10px;
+ 
+    /* border: 1px solid silver; */
+    border-radius: 4px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #87cfeb3b;
+
+    transition-property: color, background-color, border;
+    transition-duration: 250ms;
+    transition-timing-function: ease;
+
+
+    &:visited {
+        color: black;
+    }
+    &:hover,
+    &:focus  {
+      outline: none;
+      /* border: 1px solid skyblue; */
+      background-color: skyblue;
+      color: #fff;
+    }
+  &.active {
+    color: #fff;
+    background-color: skyblue;
+    /* border: 1px solid skyblue; */
+  }
+`
+
 export const Login = () => {
 
     const emailInpudId = nanoid();
@@ -71,7 +120,9 @@ export const Login = () => {
     // setPassword("");
   }
 
-    return(<>
+    return(<Wrapper>
+      <div>
+        <Header>Log IN!</Header>
         <StyledForm onSubmit={handleSubmit}>
     <label htmlFor={emailInpudId}>Email </label>
     <input
@@ -98,6 +149,7 @@ export const Login = () => {
         
         </StyledForm>
         <p>Don't have an acc?</p>
-        <NavLink to="/register">Then sign up!</NavLink>
-    </>)
+        <StyledLink to="/register">Then sign up!</StyledLink>
+        </div>
+    </Wrapper>)
 }
