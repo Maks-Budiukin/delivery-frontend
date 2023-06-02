@@ -106,6 +106,9 @@ const Logo = styled.img`
 
 const StyledClearButton = styled.button`
 
+    /* position: absolute; */
+    right: 168px;
+
     width: 120px;
     background-color: #fff;
     padding: 5px 10px;
@@ -133,7 +136,8 @@ const StyledClearButton = styled.button`
 
 `
 const AuthBlock = styled.div`
-    width: 300;
+    min-width: 300;
+    display: flex;
 `
 
 

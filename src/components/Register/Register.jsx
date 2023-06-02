@@ -34,36 +34,35 @@ width: 300px;
         border: 1px solid skyblue;
         }
     }
-    button {
-    margin-left: auto;
-    background-color: #fff;
-    padding: 5px 10px;
-    border: 1px solid silver;
-    border-radius: 4px;
-
-    &:hover,
-    &:focus  {
-      outline: none;
-      border: 1px solid skyblue;
-    }
-  }
+    
+`
+const LinkBlock = styled.div`
+  padding: 8px 0 32px 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+`
+const LinkLabel = styled.span`
+  font-style: italic;
+    margin-right: 6px;
 `
 
 const StyledLink = styled(NavLink)`
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 120px;
-    background-color: #fff;
+    width: 60px;
     padding: 5px 10px;
- 
-    /* border: 1px solid silver; */
+
+    background-color: #fff;
+    padding: 1px 6px;
+    border: 1px solid silver;
     border-radius: 4px;
+
+
     text-decoration: none;
     text-align: center;
     font-size: 14px;
-    font-weight: 500;
-    background-color: #87cfeb3b;
+    font-weight: 400;
+
 
     transition-property: color, background-color, border;
     transition-duration: 250ms;
@@ -75,16 +74,38 @@ const StyledLink = styled(NavLink)`
     }
     &:hover,
     &:focus  {
-      outline: none;
-      /* border: 1px solid skyblue; */
-      background-color: skyblue;
-      color: #fff;
+      color: skyblue;
+      border: 1px solid skyblue;
     }
   &.active {
     color: #fff;
     background-color: skyblue;
-    /* border: 1px solid skyblue; */
   }
+`
+
+const StyledButton = styled.button`
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 120px;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 4px;
+
+    font-weight: bold;
+    text-align: center;
+    font-size: 14px;
+    background-color: #87cfeb3b;
+
+    transition-property: color, background-color, border;
+    transition-duration: 250ms;
+    transition-timing-function: ease;
+
+    &:hover,
+    &:focus  {
+      background-color: skyblue;
+      color: #fff;
+    }
 `
 
 const Header = styled.h1`
@@ -199,12 +220,12 @@ export const Register = () => {
       required
         />
         
+        <LinkBlock><LinkLabel>Already registered? </LinkLabel>
+        <StyledLink to="/login">Log IN!</StyledLink></LinkBlock>
 
-        <button type="submit">Sign Up</button>
+        <StyledButton type="submit">Sign Up!</StyledButton>
         
         </StyledForm>
-        <p>Already registered? </p>
-        <StyledLink to="/login">Then Log IN!</StyledLink>
         </div>
         </Wrapper>
     )
